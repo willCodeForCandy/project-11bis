@@ -1,0 +1,40 @@
+.saved-location {
+  background-color: var(--color-accent-1);
+  border-radius: var(--border-radius-l);
+  padding: var(--spacing-s) var(--spacing-m);
+  border: 1px dashed var(--color-light);
+  outline: 4px solid var(--color-accent-1);
+  max-height: 140px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin: 0px 5px;
+  min-width: 220px;
+  @media screen and (max-width: 750px) {
+    width: 250px;
+  }
+}
+.saved-location .main-weather {
+  padding: 0;
+}
+.saved-location .weather-icon > img {
+  max-height: 80px;
+}
+
+.saved-location h2 {
+  font-size: var(--font-size-m);
+}
+
+.saved-location .location-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.saved-location .location-info .current-location > p {
+  display: none;
+}
+
+.saved-location .current-location {
+  margin-top: 0;
+}

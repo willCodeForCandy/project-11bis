@@ -1,0 +1,54 @@
+#root {
+  gap: var(--spacing-m);
+  padding: var(--spacing-m);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100svh;
+}
+.stitched {
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: inset 4px 5px 5px rgba(255, 255, 255, 0.5),
+    inset -3px -3px 3px #7a545456;
+  position: relative;
+}
+
+.stitched::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  border-radius: 12px;
+  top: 13px;
+  left: 13px;
+  z-index: 0;
+  width: calc(100% - 30px);
+  height: calc(100% - 30px);
+  border: 2px dashed var(--color-light);
+  box-shadow: inset -2px -2px 1px #7a545425, inset 2px 2px 1px #7a545425;
+}
+main {
+  flex: 1;
+  display: flex;
+}
+footer {
+  background-color: var(--color-accent-4);
+}
+
+/* @media (prefers-color-scheme: dark) {
+  .stitched {
+    background-color: var(--color-dark);
+  }
+  header.stitched::before {
+    border-color: var(--color-accent-2);
+  }
+  main.stitched::before {
+    border-color: var(--color-accent-3);
+  }
+  aside.stitched::before {
+    border-color: var(--color-accent-1);
+  }
+  footer.stitched::before {
+    border-color: var(--color-accent-4);
+  }
+} */

@@ -1,0 +1,14 @@
+.socials a {
+  height: 0px;
+  display: inline-block;
+}
+
+.socials img {
+  filter: invert(1);
+  height: 40px;
+  transition: all 0.5s;
+}
+.socials img:hover {
+  filter: invert(1) drop-shadow(0px 0px 3px var(--color-dark));
+  transform: rotate(20deg);
+}

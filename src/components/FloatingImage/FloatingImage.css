@@ -1,0 +1,31 @@
+.floater {
+  width: 150px;
+  filter: drop-shadow(5px 15px 10px rgba(0, 0, 0, 0.6));
+  transform: translatey(0px);
+  animation: float 6s ease-in-out infinite;
+  position: absolute;
+  bottom: var(--spacing-xl);
+  right: var(--spacing-xl);
+}
+
+@keyframes float {
+  0% {
+    filter: drop-shadow(5px 15px 10px rgba(0, 0, 0, 0.6));
+    transform: translatey(0px);
+  }
+  50% {
+    filter: drop-shadow(25px 15px 10px rgba(0, 0, 0, 0.2));
+    transform: translatey(-20px) translateX(-10px);
+  }
+  100% {
+    filter: drop-shadow(5px 15px 10px rgba(0, 0, 0, 0.6));
+    transform: translatey(0px);
+  }
+}
+
+@media screen and (max-height: 780px) {
+  .floater {
+    width: 100px;
+    bottom: var(--spacing-m);
+  }
+}

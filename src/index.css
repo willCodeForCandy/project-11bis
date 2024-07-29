@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Chango&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+:root {
+  font-family: 'nunito', sans-serif;
+  line-height: 1.5;
+  font-weight: 600;
+
+  color-scheme: light dark;
+  color: var(--color-dark);
+  background-color: var(--color-accent-20);
+
+  /* Color variables */
+  --color-light: #f7f7f7;
+  --color-dark: #7a5454;
+  --color-accent-1: #cce6ff;
+  --color-accent-20: #ffebb33a;
+  --color-accent-2: #ffebb3;
+  --color-accent-3: hsl(24, 100%, 87%);
+  --color-accent-4: hsl(333, 100%, 80%);
+  --color-accent-5: hsl(138, 24%, 84%);
+  --color-cloudy-day: #dddddd;
+  --color-cloudy-night: #3a3a3a;
+
+  /* Spacings */
+  --spacing-xl: 50px;
+  --spacing-l: 30px;
+  --spacing-m: 18px;
+  --spacing-s: 10px;
+  --spacing-xs: 5px;
+
+  /* Border radius */
+  --border-radius-l: 15px;
+  --border-radius-m: 10px;
+  --border-radius-s: 5px;
+
+  /*Font Sizes*/
+  --font-size-sm: 1rem;
+  --font-size-m: 1.2rem;
+  --font-size-l: 1.5rem;
+  --font-size-xl: 2.5rem;
+  --font-size-xxl: 4.5rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+body {
+  height: 100svh;
+  width: 100vw;
+  overflow: hidden;
+  @media screen and (max-width: 750px) {
+    min-height: 100svh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: auto;
+  }
+}
+
+p::first-letter {
+  text-transform: uppercase;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s;
+}
+
+.chubby-title {
+  font-family: 'Chango';
+  font-size: var(--font-size-xl);
+  color: var(--color-light);
+  text-shadow: 2px 0px 7px #7a545487;
+  @media screen and (max-width: 450px) {
+    font-size: var(--font-size-l);
+  }
+  @container (max-width: 420px) {
+    font-size: var(--font-size-l);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: var(--color-accent-dark-1);
+    color: var(--color-light);
+    --color-accent-1: hsl(209, 38%, 24%);
+    --color-accent-2: hsl(44, 38%, 25%);
+    --color-accent-3: hsl(34, 31%, 35%);
+    --color-accent-4: hsl(333, 19%, 39%);
+    --color-accent-5: hsl(138, 24%, 30%);
+    --color-cloudy-day: var(--color-cloudy-night);
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

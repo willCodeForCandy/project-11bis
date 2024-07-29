@@ -1,0 +1,23 @@
+section#about {
+  flex: 1;
+  background-color: var(--color-accent-2);
+}
+
+#about h2 {
+  margin-bottom: var(--spacing-m);
+}
+
+#about a {
+  color: var(--color-accent-dark-1);
+  transition: all 0.3s;
+}
+
+#about a:hover {
+  font-weight: 800;
+}
+
+@media screen and (max-width: 520px) {
+  #about .chubby-title {
+    font-size: var(--font-size-l);
+  }
+}

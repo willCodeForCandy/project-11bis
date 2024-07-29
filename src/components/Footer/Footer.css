@@ -1,0 +1,21 @@
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer > * {
+  width: 100%;
+}
+
+footer p {
+  color: var(--color-light);
+}
+
+footer menu {
+  height: 40px;
+  display: flex;
+  justify-content: end;
+  gap: var(--spacing-m);
+}

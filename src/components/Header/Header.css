@@ -1,0 +1,30 @@
+header {
+  background-color: var(--color-accent-5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header ul {
+  display: flex;
+  justify-content: end;
+  gap: var(--spacing-xs);
+}
+
+header nav a:hover,
+header nav a.active {
+  background-color: rgba(38, 88, 40, 0.3);
+  color: var(--color-light);
+}
+
+header nav a {
+  padding: var(--spacing-xs) var(--spacing-m);
+  border-radius: 30px;
+}
+
+#logo {
+  height: 42px;
+}
+
+a.logo-wrapper {
+  height: 42px;
+}

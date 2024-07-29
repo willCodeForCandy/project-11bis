@@ -1,0 +1,49 @@
+aside {
+  background-color: var(--color-accent-3);
+  flex: 1 0 250px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+}
+
+aside ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-m);
+}
+
+aside nav ul {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 70svh;
+}
+
+/* Scrollbar styles */
+aside nav ul::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+aside nav ul::-webkit-scrollbar-track {
+  background: #0001;
+}
+
+aside nav ul::-webkit-scrollbar-thumb {
+  background: #999;
+}
+
+aside nav ul::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+@media screen and (max-width: 750px) {
+  aside {
+    flex: 0;
+  }
+  aside nav ul {
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+}
