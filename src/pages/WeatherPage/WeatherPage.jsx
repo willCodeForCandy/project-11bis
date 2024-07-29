@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Weather from '../Weather/Weather';
 import './WeatherPage.css';
 import Aside from '../../components/Aside/Aside';
 import { updateWithoutDuplicates } from '../../utils/listUpdater';
 import { apiRequest } from '../../utils/apiRequest';
 import Loader from '../../components/Loader/Loader';
+import { LocationsContext } from '../../context';
 
 const WeatherPage = () => {
-  const [savedLocations, setSavedLocations] = useState(
-    JSON.parse(localStorage.getItem('savedLocations')) ?? []
-  );
+  console.log('Rendering WeatherPage');
+  const { savedLocations, setSavedLocations } = useContext(LocationsContext);
 
   const getLocalWeather = () => {
     if (navigator.geolocation) {
@@ -69,8 +69,8 @@ const WeatherPage = () => {
 
   return (
     <div id="weather">
-      <Aside getWeather={getWeather} listOfLocations={savedLocations} />
-      {savedLocations.length ? <Weather list={savedLocations} /> : <Loader />}
+      <Aside getWeather={getWeather} />
+      {savedLocations.length ? <Weather /> : <Loader />}
     </div>
   );
 };

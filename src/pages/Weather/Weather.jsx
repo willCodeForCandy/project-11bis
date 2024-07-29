@@ -1,14 +1,19 @@
 import { useParams } from 'react-router-dom';
 import MainWeather from '../../components/MainWeather/MainWeather';
 import './Weather.css';
+import { useContext, useEffect } from 'react';
+import { LocationsContext } from '../../context';
 
-const Weather = ({ list }) => {
+const Weather = () => {
+  console.log('rendering Weather');
+  const { savedLocations } = useContext(LocationsContext);
   const params = useParams();
-  const localWeather = list.find(location => location.local);
-  const defaultWeatherId = localWeather ? localWeather.id : list[0].id;
+  const localWeather = savedLocations.find(location => location.local);
+  const defaultWeatherId = localWeather
+    ? localWeather.id
+    : savedLocations[0].id;
   const locationId = params.id || defaultWeatherId;
-  const weather = list.find(location => location.id == locationId); // uso == porque params son strings
-
+  const weather = savedLocations.find(location => location.id == locationId); // uso == porque params son strings
   return (
     <>
       {weather && (

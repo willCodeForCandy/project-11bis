@@ -5,6 +5,9 @@ import { apiRequest } from '../../utils/apiRequest';
 import { useNavigate } from 'react-router-dom';
 
 const SearchBar = ({ getWeather }) => {
+  {
+    console.log('rendering searchBar');
+  }
   const [userInput, setUserInput] = useState('');
   const [error, setError] = useState(false);
   const navigate = useNavigate();

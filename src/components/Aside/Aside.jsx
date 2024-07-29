@@ -2,15 +2,18 @@ import { Link } from 'react-router-dom';
 import Location from '../Location/Location';
 import SearchBar from '../SearchBar/SearchBar';
 import './Aside.css';
+import { useContext } from 'react';
+import { LocationsContext } from '../../context';
 
-const Aside = ({ getWeather, listOfLocations }) => {
+const Aside = ({ getWeather }) => {
+  const { savedLocations } = useContext(LocationsContext);
   return (
     <aside className="stitched">
       <SearchBar getWeather={getWeather} />
       <nav>
         <ul>
-          {listOfLocations.length ? (
-            listOfLocations.map(locationWeatherReport => (
+          {savedLocations.length ? (
+            savedLocations.map(locationWeatherReport => (
               <Link
                 to={`/weather/${locationWeatherReport.id}`}
                 key={locationWeatherReport.id}
