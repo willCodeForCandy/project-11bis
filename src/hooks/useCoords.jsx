@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { LocationsContext } from '../context';
+import { apiRequest } from '../utils/apiRequest';
+import { useWeather } from './useWeather';
 
 export const useCoords = () => {
   const { localCoords, setLocalCoords } = useContext(LocationsContext);
@@ -33,6 +35,7 @@ export const useCoords = () => {
           lat: cityLocation[0].lat,
           lon: cityLocation[0].lon,
         });
+        console.log('city coords', cityLocation);
         setError('');
       } else {
         setError('No se encontró una ubicación con ese nombre');

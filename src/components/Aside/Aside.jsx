@@ -4,14 +4,13 @@ import SearchBar from '../SearchBar/SearchBar';
 import './Aside.css';
 import { useContext } from 'react';
 import { LocationsContext } from '../../context';
-import { useWeather } from '../../hooks/useWeather';
 
 const Aside = () => {
   const { savedLocations } = useContext(LocationsContext);
-  const { getWeather } = useWeather();
+
   return (
     <aside className="stitched">
-      <SearchBar getWeather={getWeather} />
+      <SearchBar />
       <nav>
         <ul>
           {savedLocations.length ? (

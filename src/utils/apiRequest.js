@@ -1,10 +1,6 @@
-export const apiRequest = async ({
-  geolocation = false,
-  cityName = '',
-  coords = {},
-}) => {
+export const apiRequest = async ({ cityName = '', coords = {} }) => {
   let res;
-  if (geolocation) {
+  if (cityName) {
     res = await fetch(
       `${import.meta.env.VITE_BASE_URL}geo/1.0/direct?q=${cityName}&appid=${
         import.meta.env.VITE_OPEN_WEATHER_API_KEY
