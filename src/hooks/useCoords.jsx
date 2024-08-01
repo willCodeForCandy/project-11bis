@@ -3,7 +3,7 @@ import { LocationsContext } from '../context';
 
 export const useCoords = () => {
   const { localCoords, setLocalCoords } = useContext(LocationsContext);
-  const [coords, setCoords] = useState({ lat: 0, lon: 0 });
+  const [coords, setCoords] = useState();
   const [error, setError] = useState('');
   const getLocalCoords = () => {
     if (navigator.geolocation) {

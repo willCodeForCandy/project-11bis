@@ -3,6 +3,7 @@ import MainWeather from '../../components/MainWeather/MainWeather';
 import './Weather.css';
 import { useContext, useEffect } from 'react';
 import { LocationsContext } from '../../context';
+import Loader from '../../components/Loader/Loader';
 
 const Weather = () => {
   console.log('rendering Weather');
@@ -11,20 +12,19 @@ const Weather = () => {
   const localWeather = savedLocations.find(location => location.local);
   const defaultWeatherId = localWeather
     ? localWeather.id
-    : savedLocations[0].id;
+    : savedLocations[0]?.id;
   const locationId = params.id || defaultWeatherId;
   const weather = savedLocations.find(location => location.id == locationId); // uso == porque params son strings
   return (
-    <>
-      {weather && (
-        <section
-          id="main-weather"
-          className="stitched"
-          style={{
-            backgroundColor:
-              weather.clouds.all > 50 && 'var(--color-cloudy-day)',
-          }}
-        >
+    <section
+      id="main-weather"
+      className="stitched"
+      style={{
+        backgroundColor: weather?.clouds.all > 50 && 'var(--color-cloudy-day)',
+      }}
+    >
+      {weather ? (
+        <>
           <MainWeather weather={weather} />
           <div className="additional-info">
             <ul>
@@ -42,9 +42,11 @@ const Weather = () => {
               </li>
             </ul>
           </div>
-        </section>
+        </>
+      ) : (
+        <Loader />
       )}
-    </>
+    </section>
   );
 };
 
