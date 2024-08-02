@@ -32,7 +32,7 @@ export const useWeather = () => {
           //   sunrise: weatherReport.sys.sunrise,
           //   sunset: weatherReport.sys.sunset,
           // };
-          setWeather(weatherReport);
+          // setWeather(weatherReport);
           const updatedLocations = updateWithoutDuplicates(
             weatherReport,
             savedLocations

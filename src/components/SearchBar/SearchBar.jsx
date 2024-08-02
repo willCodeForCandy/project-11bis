@@ -10,8 +10,8 @@ const SearchBar = () => {
   {
     console.log('rendering searchBar');
   }
-  const { getWeather, weather } = useWeather();
-  const { getCityCoords, coords } = useCoords();
+  const { getWeather, weather, setWeather } = useWeather();
+  const { getCityCoords, coords, setCoords } = useCoords();
   const [userInput, setUserInput] = useState('');
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -23,12 +23,22 @@ const SearchBar = () => {
   const handleSubmit = async (e, cityName) => {
     e.preventDefault();
     console.log('submit', cityName);
-    await getCityCoords(cityName);
+    setCoords(await getCityCoords(cityName));
 
-    console.log('fetching weather from searchBar');
-    await getWeather(coords);
-    navigate(`/weather/${weather.id}`);
+    // console.log('fetching weather from searchBar');
+    // await getWeather(coords);
+    // navigate(`/weather/${weather.id}`);
   };
+  const fetchWeather = async coords => {
+    setWeather(await getWeather(coords));
+    console.log('fetching weather from searchBar');
+  };
+  useEffect(() => {
+    fetchWeather(coords);
+  }, [coords]);
+  useEffect(() => {
+    navigate(`/weather/${weather?.id}`);
+  }, [weather]);
 
   return (
     <>

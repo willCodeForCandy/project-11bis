@@ -37,6 +37,10 @@ export const useCoords = () => {
         });
         console.log('city coords', cityLocation);
         setError('');
+        return {
+          lat: cityLocation[0].lat,
+          lon: cityLocation[0].lon,
+        };
       } else {
         setError('No se encontró una ubicación con ese nombre');
       }
