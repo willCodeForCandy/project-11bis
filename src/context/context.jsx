@@ -11,12 +11,10 @@ export const LocationsContextProvider = ({ children }) => {
   const [savedLocations, setSavedLocations] = useState(
     JSON.parse(localStorage.getItem('savedLocations')) ?? []
   );
-  const [localCoords, setLocalCoords] = useState();
+  // const [localCoords, setLocalCoords] = useState();
 
   return (
-    <LocationsContext.Provider
-      value={{ savedLocations, setSavedLocations, localCoords, setLocalCoords }}
-    >
+    <LocationsContext.Provider value={{ savedLocations, setSavedLocations }}>
       {children}
     </LocationsContext.Provider>
   );

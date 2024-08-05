@@ -3,7 +3,7 @@ import Location from '../Location/Location';
 import SearchBar from '../SearchBar/SearchBar';
 import './Aside.css';
 import { useContext } from 'react';
-import { LocationsContext } from '../../context';
+import { LocationsContext } from '../../context/context';
 
 const Aside = () => {
   const { savedLocations } = useContext(LocationsContext);

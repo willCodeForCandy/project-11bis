@@ -1,21 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import searchIcon from '/assets/search.png';
 import './SearchBar.css';
-import { apiRequest } from '../../utils/apiRequest';
 import { useNavigate } from 'react-router-dom';
 import { useWeather } from '../../hooks/useWeather';
-import { useCoords } from '../../hooks/useCoords';
+import { CoordsContext } from '../../context/CoordsProvider';
+import { getCityCoords } from '../../reducers/weather.actions';
 
 const SearchBar = () => {
-  {
-    console.log('rendering searchBar');
-  }
-  const { getWeather, weather, setWeather } = useWeather();
-  const { getCityCoords, coords, setCoords } = useCoords();
+  console.log('rendering searchBar');
+  const { state, dispatch } = useContext(CoordsContext);
   const [userInput, setUserInput] = useState('');
-  const [error, setError] = useState(false);
-  const navigate = useNavigate();
-
   const handleChange = e => {
     setUserInput(e.target.value);
   };
@@ -23,25 +17,12 @@ const SearchBar = () => {
   const handleSubmit = async (e, cityName) => {
     e.preventDefault();
     console.log('submit', cityName);
-    setCoords(await getCityCoords(cityName));
-
-    // console.log('fetching weather from searchBar');
-    // await getWeather(coords);
-    // navigate(`/weather/${weather.id}`);
+    await getCityCoords({ dispatch, cityName });
   };
-  const fetchWeather = async coords => {
-    setWeather(await getWeather(coords));
-    console.log('fetching weather from searchBar');
-  };
-  useEffect(() => {
-    fetchWeather(coords);
-  }, [coords]);
-  useEffect(() => {
-    navigate(`/weather/${weather?.id}`);
-  }, [weather]);
 
   return (
     <>
+      {console.log(state)}
       <form
         id="search-form"
         role="search"
@@ -61,9 +42,37 @@ const SearchBar = () => {
           <img src={searchIcon} alt="Lupa" />
         </button>
       </form>
-      {error && <p>Ciudad no encontrada</p>}
+      {/* {error && <p>Ciudad no encontrada</p>} */}
     </>
   );
 };
 
 export default SearchBar;
+
+// const { getWeather, weather, setWeather } = useWeather();
+// // const { getCityCoords, coords, setCoords } = useCoords();
+// const [userInput, setUserInput] = useState('');
+
+// const navigate = useNavigate();
+
+// const handleChange = e => {
+//   setUserInput(e.target.value);
+// };
+
+// const handleSubmit = async (e, cityName) => {
+//   e.preventDefault();
+//   console.log('submit', cityName);
+//   setCoords(await getCityCoords(cityName));
+// };
+// const fetchWeather = async coords => {
+//   setWeather(await getWeather(coords));
+//   console.log('fetching weather from searchBar');
+// };
+// useEffect(() => {
+//   // fetchWeather(coords);
+//   getWeather(coords);
+// }, [coords]);
+// useEffect(() => {
+//   navigate(`/weather/${weather?.id}`);
+//   console.log(weather);
+// }, [weather]);

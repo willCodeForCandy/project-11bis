@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { LocationsContext } from '../context';
+import { LocationsContext } from '../context/context';
 import { apiRequest } from '../utils/apiRequest';
 import { useWeather } from './useWeather';
 
