@@ -44,8 +44,7 @@ export const getCityCoords = async ({ dispatch, cityName }) => {
   // }
 };
 
-export const getWeather = async ({ dispatch, state }) => {
-  const { coords, localCoords } = state;
+export const getWeather = async ({ dispatch, coords }) => {
   if (coords) {
     const weatherReport = await apiRequest({ coords });
     dispatch({ type: 'GET_WEATHER', payload: weatherReport });

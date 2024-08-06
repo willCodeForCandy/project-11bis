@@ -10,11 +10,6 @@ const MainWeather = ({ weather }) => {
         <h2 className="chubby-title">
           {weather.name}, {weather.sys.country}
         </h2>
-        {weather.local && (
-          <div className="current-location">
-            <img src={locationPin} /> <p>Ubicación actual</p>
-          </div>
-        )}
       </div>
 
       <div className="main-weather">

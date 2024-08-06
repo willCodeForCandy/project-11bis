@@ -17,7 +17,7 @@ const WeatherPage = () => {
   }, []);
   useEffect(() => {
     if (coords) {
-      getWeather({ dispatch, state });
+      getWeather({ dispatch, coords });
     }
   }, [coords]);
 

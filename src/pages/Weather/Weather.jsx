@@ -5,6 +5,7 @@ import { useContext, useEffect } from 'react';
 import { LocationsContext } from '../../context/context';
 import Loader from '../../components/Loader/Loader';
 import { CoordsContext } from '../../context/CoordsProvider';
+import FavBtn from '../../components/FavBtn/FavBtn';
 
 const Weather = ({ weather }) => {
   console.log('rendering Weather');
@@ -18,6 +19,7 @@ const Weather = ({ weather }) => {
     >
       {weather ? (
         <>
+          <FavBtn weather={weather} />
           <MainWeather weather={weather} />
           <div className="additional-info">
             <ul>

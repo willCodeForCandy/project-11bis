@@ -34,21 +34,3 @@ main {
 footer {
   background-color: var(--color-accent-4);
 }
-
-/* @media (prefers-color-scheme: dark) {
-  .stitched {
-    background-color: var(--color-dark);
-  }
-  header.stitched::before {
-    border-color: var(--color-accent-2);
-  }
-  main.stitched::before {
-    border-color: var(--color-accent-3);
-  }
-  aside.stitched::before {
-    border-color: var(--color-accent-1);
-  }
-  footer.stitched::before {
-    border-color: var(--color-accent-4);
-  }
-} */
