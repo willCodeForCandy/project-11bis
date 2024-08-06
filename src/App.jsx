@@ -3,7 +3,6 @@ import './App.css';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import { headerLinks } from './data/headerLinks';
-import { LocationsContextProvider } from './context/context';
 import { CoordsProvider } from './context/CoordsProvider';
 
 const App = () => {
@@ -13,9 +12,7 @@ const App = () => {
       <Header pages={headerLinks} />
       <main>
         <CoordsProvider>
-          <LocationsContextProvider>
-            <Outlet />
-          </LocationsContextProvider>
+          <Outlet />
         </CoordsProvider>
       </main>
       <Footer />

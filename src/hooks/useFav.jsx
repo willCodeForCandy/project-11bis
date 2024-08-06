@@ -20,9 +20,17 @@ export const useFav = weather => {
     localStorage.setItem('savedLocations', JSON.stringify(favList));
   };
 
+  const checkFavStatus = (weather, list) => {
+    if (list.find(location => location.id === weather.id)) {
+      setFav(true);
+    } else {
+      setFav(false);
+    }
+  };
+
   useEffect(() => {
-    setFav(weather.isFav ?? false);
-  }, [weather]);
+    checkFavStatus(weather, savedLocations);
+  }, [weather?.id]);
 
   return { fav, handleFavs, savedLocations };
 };
