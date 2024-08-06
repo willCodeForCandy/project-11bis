@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react';
 import searchIcon from '/assets/search.png';
 import './SearchBar.css';
 import { useNavigate } from 'react-router-dom';
-import { useWeather } from '../../hooks/useWeather';
 import { CoordsContext } from '../../context/CoordsProvider';
 import { getCityCoords } from '../../reducers/weather.actions';
 

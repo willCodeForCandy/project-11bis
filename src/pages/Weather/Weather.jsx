@@ -1,13 +1,13 @@
 import { useParams } from 'react-router-dom';
 import MainWeather from '../../components/MainWeather/MainWeather';
 import './Weather.css';
-import { useContext, useEffect } from 'react';
-import { LocationsContext } from '../../context/context';
+import { memo, useContext, useEffect } from 'react';
+
 import Loader from '../../components/Loader/Loader';
 import { CoordsContext } from '../../context/CoordsProvider';
 import FavBtn from '../../components/FavBtn/FavBtn';
 
-const Weather = ({ weather }) => {
+const Weather = memo(({ weather }) => {
   console.log('rendering Weather');
   return (
     <section
@@ -43,7 +43,7 @@ const Weather = ({ weather }) => {
       )}
     </section>
   );
-};
+});
 
 export default Weather;
 

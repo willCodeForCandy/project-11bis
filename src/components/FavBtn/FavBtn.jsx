@@ -1,27 +1,8 @@
-import { useEffect, useState } from 'react';
 import './FavBtn.css';
+import { useFav } from '../../hooks/useFav';
 
 const FavBtn = ({ weather }) => {
-  const [fav, setFav] = useState(weather.isFav ?? false);
-
-  const handleFavs = (weather, fav) => {
-    let favList = JSON.parse(localStorage.getItem('savedLocations')) ?? [];
-
-    setFav(fav => !fav);
-
-    if (fav) {
-      favList = favList.filter(location => location.id !== weather.id);
-    } else {
-      weather.isFav = true;
-      favList.unshift(weather);
-    }
-
-    localStorage.setItem('savedLocations', JSON.stringify(favList));
-  };
-
-  useEffect(() => {
-    setFav(weather.isFav ?? false);
-  }, [weather]);
+  const { fav, handleFavs } = useFav(weather);
 
   return (
     <button
@@ -30,7 +11,6 @@ const FavBtn = ({ weather }) => {
         handleFavs(weather, fav);
       }}
     >
-      {console.log(weather, fav)}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="28"
