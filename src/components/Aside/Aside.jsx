@@ -3,19 +3,19 @@ import Location from '../Location/Location';
 import SearchBar from '../SearchBar/SearchBar';
 import './Aside.css';
 import { useContext } from 'react';
-import { LocationsContext } from '../../context';
-import { useWeather } from '../../hooks/useWeather';
+import { LocationsContext } from '../../context/context';
+import { useFav } from '../../hooks/useFav';
 
-const Aside = () => {
-  const { savedLocations } = useContext(LocationsContext);
-  const { getWeather } = useWeather();
+const Aside = ({ listOfLocations }) => {
+  // const { savedLocations } = useContext(LocationsContext);
+
   return (
     <aside className="stitched">
-      <SearchBar getWeather={getWeather} />
+      <SearchBar />
       <nav>
         <ul>
-          {savedLocations.length ? (
-            savedLocations.map(locationWeatherReport => (
+          {listOfLocations.length ? (
+            listOfLocations.map(locationWeatherReport => (
               <Link
                 to={`/weather/${locationWeatherReport.id}`}
                 key={locationWeatherReport.id}

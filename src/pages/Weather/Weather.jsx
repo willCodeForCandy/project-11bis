@@ -1,20 +1,14 @@
 import { useParams } from 'react-router-dom';
 import MainWeather from '../../components/MainWeather/MainWeather';
 import './Weather.css';
-import { useContext, useEffect } from 'react';
-import { LocationsContext } from '../../context';
-import Loader from '../../components/Loader/Loader';
+import { memo, useContext, useEffect } from 'react';
 
-const Weather = () => {
+import Loader from '../../components/Loader/Loader';
+import { CoordsContext } from '../../context/CoordsProvider';
+import FavBtn from '../../components/FavBtn/FavBtn';
+
+const Weather = memo(({ weather }) => {
   console.log('rendering Weather');
-  const { savedLocations } = useContext(LocationsContext);
-  const params = useParams();
-  const localWeather = savedLocations.find(location => location.local);
-  const defaultWeatherId = localWeather
-    ? localWeather.id
-    : savedLocations[0]?.id;
-  const locationId = params.id || defaultWeatherId;
-  const weather = savedLocations.find(location => location.id == locationId); // uso == porque params son strings
   return (
     <section
       id="main-weather"
@@ -25,6 +19,7 @@ const Weather = () => {
     >
       {weather ? (
         <>
+          <FavBtn weather={weather} />
           <MainWeather weather={weather} />
           <div className="additional-info">
             <ul>
@@ -48,6 +43,15 @@ const Weather = () => {
       )}
     </section>
   );
-};
+});
 
 export default Weather;
+
+// const { savedLocations } = useContext(LocationsContext);
+// const params = useParams();
+// const localWeather = savedLocations.find(location => location.local);
+// const defaultWeatherId = localWeather
+//   ? localWeather.id
+//   : savedLocations[0]?.id;
+// const locationId = params.id || defaultWeatherId;
+// const weather = savedLocations.find(location => location.id == locationId); // uso == porque params son strings
