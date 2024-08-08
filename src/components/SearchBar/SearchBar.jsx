@@ -1,77 +1,47 @@
-import { useContext, useEffect, useState } from 'react';
-import searchIcon from '/assets/search.png';
 import './SearchBar.css';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useRef } from 'react';
+import searchIcon from '/assets/search.png';
 import { CoordsContext } from '../../context/CoordsProvider';
 import { getCityCoords } from '../../reducers/weather.actions';
 
 const SearchBar = () => {
   console.log('rendering searchBar');
-  const { state, dispatch } = useContext(CoordsContext);
-  const [userInput, setUserInput] = useState('');
-  const handleChange = e => {
-    setUserInput(e.target.value);
-  };
+  const { dispatch } = useContext(CoordsContext);
+  const searchInput = useRef(null);
 
-  const handleSubmit = async (e, cityName) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log('submit', cityName);
-    await getCityCoords({ dispatch, cityName });
+    const cityName = searchInput?.current.value;
+
+    if (cityName) {
+      console.log('submit', cityName);
+      await getCityCoords({ dispatch, cityName });
+    } else {
+      dispatch({
+        type: 'ERROR',
+        message: 'Ingresa el nombre de una ciudad para buscar el clima',
+      });
+    }
   };
 
   return (
     <>
-      {console.log(state)}
-      <form
-        id="search-form"
-        role="search"
-        onSubmit={e => handleSubmit(e, userInput)}
-      >
+      <form id="search-form" role="search" onSubmit={e => handleSubmit(e)}>
         <input
           id="q"
           aria-label="Buscar por ciudad"
           placeholder="Buscar por ciudad"
           type="search"
           name="q"
-          value={userInput}
-          onChange={e => handleChange(e)}
+          ref={searchInput}
         />
 
         <button type="submit">
           <img src={searchIcon} alt="Lupa" />
         </button>
       </form>
-      {/* {error && <p>Ciudad no encontrada</p>} */}
     </>
   );
 };
 
 export default SearchBar;
-
-// const { getWeather, weather, setWeather } = useWeather();
-// // const { getCityCoords, coords, setCoords } = useCoords();
-// const [userInput, setUserInput] = useState('');
-
-// const navigate = useNavigate();
-
-// const handleChange = e => {
-//   setUserInput(e.target.value);
-// };
-
-// const handleSubmit = async (e, cityName) => {
-//   e.preventDefault();
-//   console.log('submit', cityName);
-//   setCoords(await getCityCoords(cityName));
-// };
-// const fetchWeather = async coords => {
-//   setWeather(await getWeather(coords));
-//   console.log('fetching weather from searchBar');
-// };
-// useEffect(() => {
-//   // fetchWeather(coords);
-//   getWeather(coords);
-// }, [coords]);
-// useEffect(() => {
-//   navigate(`/weather/${weather?.id}`);
-//   console.log(weather);
-// }, [weather]);

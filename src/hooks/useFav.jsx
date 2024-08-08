@@ -1,22 +1,22 @@
-import { useEffect, useState } from 'react';
-export const useFav = weather => {
+import { useContext, useEffect, useState } from 'react';
+import { CoordsContext } from '../context/CoordsProvider';
+export const useFav = ({ weather, setSavedLocations }) => {
   const [fav, setFav] = useState(weather.isFav ?? false);
-  const [savedLocations, setSavedLocations] = useState(
-    JSON.parse(localStorage.getItem('savedLocations')) ?? []
-  );
+  const { state, dispatch } = useContext(CoordsContext);
+  const { savedLocations } = state;
 
   const handleFavs = (weather, fav) => {
-    let favList = JSON.parse(localStorage.getItem('savedLocations')) ?? [];
+    // let favList = JSON.parse(localStorage.getItem('savedLocations')) ?? [];
 
     setFav(fav => !fav);
-
+    let favList = savedLocations;
     if (fav) {
-      favList = favList.filter(location => location.id !== weather.id);
+      favList = savedLocations.filter(location => location.id !== weather.id);
     } else {
       weather.isFav = true;
-      favList.unshift(weather);
+      favList = [weather, ...savedLocations];
     }
-    setSavedLocations(favList);
+    dispatch({ type: 'MANAGE_FAVS', payload: favList });
     localStorage.setItem('savedLocations', JSON.stringify(favList));
   };
 

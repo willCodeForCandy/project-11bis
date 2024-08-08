@@ -2,7 +2,7 @@ import './FavBtn.css';
 import { useFav } from '../../hooks/useFav';
 
 const FavBtn = ({ weather }) => {
-  const { fav, handleFavs } = useFav(weather);
+  const { fav, handleFavs } = useFav({ weather });
 
   return (
     <button

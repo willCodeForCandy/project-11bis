@@ -49,9 +49,8 @@
 }
 
 body {
-  height: 100svh;
-  width: 100vw;
-  overflow: hidden;
+  min-height: 100svh;
+  overflow: auto;
   @media screen and (max-width: 750px) {
     min-height: 100svh;
     overflow-y: auto;

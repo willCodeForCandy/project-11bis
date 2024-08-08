@@ -1,32 +1,24 @@
-import { useState, useEffect, useContext } from 'react';
 import Weather from '../Weather/Weather';
 import './WeatherPage.css';
 import Aside from '../../components/Aside/Aside';
-import { CoordsContext } from '../../context/CoordsProvider';
 import { getLocalCoords, getWeather } from '../../reducers/weather.actions';
 import { useFav } from '../../hooks/useFav';
+import { useEffect, useContext } from 'react';
+import { CoordsContext } from '../../context/CoordsProvider';
 
 const WeatherPage = () => {
   console.log('Rendering WeatherPage');
-
   const { state, dispatch } = useContext(CoordsContext);
-  const { coords, weather } = state;
-  const { savedLocations } = useFav(weather ?? {});
 
+  const { savedLocations } = state;
   useEffect(() => {
     getLocalCoords(dispatch);
+    console.log('AAAAAAAAAAAAAAAAAAAAAAAAA');
   }, []);
-  useEffect(() => {
-    if (coords) {
-      getWeather({ dispatch, coords });
-    }
-  }, [coords]);
-
   return (
     <div id="weather">
-      {console.log(state)}
       <Aside listOfLocations={savedLocations} />
-      <Weather weather={weather} />
+      <Weather />
     </div>
   );
 };

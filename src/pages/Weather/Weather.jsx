@@ -1,14 +1,36 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import MainWeather from '../../components/MainWeather/MainWeather';
 import './Weather.css';
 import { memo, useContext, useEffect } from 'react';
-
-import Loader from '../../components/Loader/Loader';
 import { CoordsContext } from '../../context/CoordsProvider';
+import {
+  getWeather,
+  getWeatherFromSavedLocations,
+} from '../../reducers/weather.actions';
+import Loader from '../../components/Loader/Loader';
 import FavBtn from '../../components/FavBtn/FavBtn';
 
-const Weather = memo(({ weather }) => {
+const Weather = memo(() => {
   console.log('rendering Weather');
+  const { state, dispatch } = useContext(CoordsContext);
+  const { coords, weather, loading, savedLocations } = state;
+  const params = useParams();
+
+  useEffect(() => {
+    if (coords) {
+      getWeather({ dispatch, coords });
+    }
+  }, [coords]);
+
+  useEffect(() => {
+    const id = parseInt(params.id);
+    const wantedLocation = savedLocations.find(location => location.id === id);
+
+    if (wantedLocation) {
+      dispatch({ type: 'SET_COORDS', payload: wantedLocation.coord });
+    }
+  }, [params]);
+
   return (
     <section
       id="main-weather"
@@ -17,7 +39,8 @@ const Weather = memo(({ weather }) => {
         backgroundColor: weather?.clouds.all > 50 && 'var(--color-cloudy-day)',
       }}
     >
-      {weather ? (
+      {loading && <Loader />}
+      {weather && (
         <>
           <FavBtn weather={weather} />
           <MainWeather weather={weather} />
@@ -38,20 +61,9 @@ const Weather = memo(({ weather }) => {
             </ul>
           </div>
         </>
-      ) : (
-        <Loader />
       )}
     </section>
   );
 });
 
 export default Weather;
-
-// const { savedLocations } = useContext(LocationsContext);
-// const params = useParams();
-// const localWeather = savedLocations.find(location => location.local);
-// const defaultWeatherId = localWeather
-//   ? localWeather.id
-//   : savedLocations[0]?.id;
-// const locationId = params.id || defaultWeatherId;
-// const weather = savedLocations.find(location => location.id == locationId); // uso == porque params son strings
