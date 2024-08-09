@@ -10,10 +10,6 @@ Los datos del clima fueron obtenidos de OpenWeather, usando 2 APIs:
 - **Current Weather Data**: devuelve la información del estado actual del tiempo a partir de unas coordenadas
   https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API key}
 
-TODO:
+** DESPLIEGUE **
 
-- Evitar renderizaciones innecesarias
-- Crear custom hook (o reducer?) para fetch del clima
-- Auto actualizar ubicaciones al cargar la página
-  - Si no se actualizó en la última media hora
-- Crear listado de favoritos/ubicaciones guardadas (reemplaza el historial)
+https://kawaii2-0.vercel.app/
