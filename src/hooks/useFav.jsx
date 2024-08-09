@@ -8,10 +8,8 @@ export const useFav = ({ weather, setSavedLocations }) => {
 
   const handleFavs = (weather, fav) => {
     if (fav) {
-      console.log('Es fav', savedLocations);
       removeFav({ dispatch, newFav: weather, favList: savedLocations });
     } else {
-      console.log('NO Es fav', savedLocations);
       weather.isFav = true;
       addFav({ dispatch, newFav: weather, favList: savedLocations });
     }
