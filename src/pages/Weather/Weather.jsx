@@ -1,25 +1,45 @@
 import { useParams } from 'react-router-dom';
 import MainWeather from '../../components/MainWeather/MainWeather';
 import './Weather.css';
+import { useContext, useEffect } from 'react';
+import { CoordsContext } from '../../context/CoordsProvider';
+import { getWeather } from '../../reducers/weather.actions';
+import Loader from '../../components/Loader/Loader';
+import FavBtn from '../../components/FavBtn/FavBtn';
 
-const Weather = ({ list }) => {
+const Weather = () => {
+  console.log('rendering Weather');
+  const { state, dispatch } = useContext(CoordsContext);
+  const { coords, weather, loading, savedLocations } = state;
   const params = useParams();
-  const localWeather = list.find(location => location.local);
-  const defaultWeatherId = localWeather ? localWeather.id : list[0].id;
-  const locationId = params.id || defaultWeatherId;
-  const weather = list.find(location => location.id == locationId); // uso == porque params son strings
+
+  useEffect(() => {
+    if (coords) {
+      getWeather({ dispatch, coords });
+    }
+  }, [coords]);
+
+  useEffect(() => {
+    const id = parseInt(params.id);
+    const wantedLocation = savedLocations.find(location => location.id === id);
+
+    if (wantedLocation) {
+      dispatch({ type: 'SET_COORDS', payload: wantedLocation.coord });
+    }
+  }, [params.id]);
 
   return (
-    <>
+    <section
+      id="main-weather"
+      className="stitched"
+      style={{
+        backgroundColor: weather?.clouds.all > 50 && 'var(--color-cloudy-day)',
+      }}
+    >
+      {loading && <Loader />}
       {weather && (
-        <section
-          id="main-weather"
-          className="stitched"
-          style={{
-            backgroundColor:
-              weather.clouds.all > 50 && 'var(--color-cloudy-day)',
-          }}
-        >
+        <>
+          <FavBtn weather={weather} />
           <MainWeather weather={weather} />
           <div className="additional-info">
             <ul>
@@ -37,9 +57,9 @@ const Weather = ({ list }) => {
               </li>
             </ul>
           </div>
-        </section>
+        </>
       )}
-    </>
+    </section>
   );
 };
 

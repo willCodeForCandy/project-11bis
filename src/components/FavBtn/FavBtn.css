@@ -1,0 +1,43 @@
+.fav-btn {
+  position: absolute;
+  top: 35px;
+  right: 40px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+}
+
+.fav-btn svg {
+  filter: drop-shadow(2px 0px 2px #7a545487);
+  stroke: var(--color-light);
+}
+.fav-btn.fav svg {
+  fill: var(--color-accent-4);
+  stroke: var(--color-accent-4);
+  animation: heartButton 1s;
+}
+
+@keyframes heartButton {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.3);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  75% {
+    transform: scale(1.3);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

@@ -3,10 +3,10 @@ import Location from '../Location/Location';
 import SearchBar from '../SearchBar/SearchBar';
 import './Aside.css';
 
-const Aside = ({ getWeather, listOfLocations }) => {
+const Aside = ({ listOfLocations }) => {
   return (
     <aside className="stitched">
-      <SearchBar getWeather={getWeather} />
+      <SearchBar />
       <nav>
         <ul>
           {listOfLocations.length ? (
@@ -19,11 +19,7 @@ const Aside = ({ getWeather, listOfLocations }) => {
               </Link>
             ))
           ) : (
-            <p>
-              No hay ubicaciones guardadas. Puedes activar la geolocalización
-              para obtener los datos de tu ubicación actual, o buscar la
-              información de cualquier ciudad.
-            </p>
+            <p>No hay ubicaciones guardadas.</p>
           )}
         </ul>
       </nav>
