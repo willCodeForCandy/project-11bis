@@ -1,23 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
 import { CoordsContext } from '../context/CoordsProvider';
+import { addFav, removeFav } from '../reducers/weather.actions';
 export const useFav = ({ weather, setSavedLocations }) => {
   const [fav, setFav] = useState(weather.isFav ?? false);
   const { state, dispatch } = useContext(CoordsContext);
   const { savedLocations } = state;
 
   const handleFavs = (weather, fav) => {
-    // let favList = JSON.parse(localStorage.getItem('savedLocations')) ?? [];
-
-    setFav(fav => !fav);
-    let favList = savedLocations;
     if (fav) {
-      favList = savedLocations.filter(location => location.id !== weather.id);
+      console.log('Es fav', savedLocations);
+      removeFav({ dispatch, newFav: weather, favList: savedLocations });
     } else {
+      console.log('NO Es fav', savedLocations);
       weather.isFav = true;
-      favList = [weather, ...savedLocations];
+      addFav({ dispatch, newFav: weather, favList: savedLocations });
     }
-    dispatch({ type: 'MANAGE_FAVS', payload: favList });
-    localStorage.setItem('savedLocations', JSON.stringify(favList));
+    setFav(fav => !fav);
   };
 
   const checkFavStatus = (weather, list) => {

@@ -18,7 +18,6 @@ export const weatherReducer = (state, action) => {
         coords: { ...action.payload },
       };
     case 'SET_COORDS':
-      console.log('!!!!CAMBIO DE COORDENADAS!!!!');
       return { ...state, coords: { ...action.payload } };
     case 'SET_WEATHER':
       return { ...state, weather: { ...action.payload }, loading: false };

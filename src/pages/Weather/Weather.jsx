@@ -1,16 +1,13 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import MainWeather from '../../components/MainWeather/MainWeather';
 import './Weather.css';
-import { memo, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { CoordsContext } from '../../context/CoordsProvider';
-import {
-  getWeather,
-  getWeatherFromSavedLocations,
-} from '../../reducers/weather.actions';
+import { getWeather } from '../../reducers/weather.actions';
 import Loader from '../../components/Loader/Loader';
 import FavBtn from '../../components/FavBtn/FavBtn';
 
-const Weather = memo(() => {
+const Weather = () => {
   console.log('rendering Weather');
   const { state, dispatch } = useContext(CoordsContext);
   const { coords, weather, loading, savedLocations } = state;
@@ -29,7 +26,7 @@ const Weather = memo(() => {
     if (wantedLocation) {
       dispatch({ type: 'SET_COORDS', payload: wantedLocation.coord });
     }
-  }, [params]);
+  }, [params.id]);
 
   return (
     <section
@@ -64,6 +61,6 @@ const Weather = memo(() => {
       )}
     </section>
   );
-});
+};
 
 export default Weather;

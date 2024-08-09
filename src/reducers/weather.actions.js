@@ -63,13 +63,21 @@ export const getWeather = async ({ dispatch, coords }) => {
   }
 };
 
-export const getWeatherFromSavedLocations = ({
-  dispatch,
-  id,
-  savedLocations,
-}) => {
-  const wantedLocation = savedLocations.find(location => location.id === id);
-  if (wantedLocation) {
-    dispatch({ type: 'SET_WEATHER', payload: wantedLocation });
-  }
+export const addFav = ({ dispatch, newFav, favList }) => {
+  const newList = [newFav, ...favList];
+  dispatch({ type: 'MANAGE_FAVS', payload: newList });
+  localStorage.setItem('savedLocations', JSON.stringify(newList));
+};
+
+export const removeFav = ({ dispatch, newFav, favList }) => {
+  const newList = favList.filter(fav => fav.id !== newFav.id);
+  dispatch({ type: 'MANAGE_FAVS', payload: newList });
+  localStorage.setItem('savedLocations', JSON.stringify(newList));
+};
+
+export const updateFav = ({ dispatch, newFav, favList }) => {
+  const newList = favList.map(listItem =>
+    listItem.id === newFav.id ? newFav : listItem
+  );
+  dispatch({ type: 'MANAGE_FAVS', payload: newList });
 };
