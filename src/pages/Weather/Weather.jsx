@@ -21,6 +21,7 @@ const Weather = () => {
 
   useEffect(() => {
     const id = parseInt(params.id);
+    console.log(id);
     const wantedLocation = savedLocations.find(location => location.id === id);
 
     if (wantedLocation) {

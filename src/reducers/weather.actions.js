@@ -14,6 +14,7 @@ export const getLocalCoords = dispatch => {
             lon: position.coords.longitude,
           },
         });
+        console.log('buscando coordenadas locales');
       },
       error => {
         dispatch({ type: 'ERROR', message: 'Error obteniendo la ubicación' });
